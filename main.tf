@@ -43,7 +43,7 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.example.id
 
-  security_groups = ["sg-075dd84d37d21ceb4"]
+  security_groups = ["${aws_security_group.ingress-all-test.id}"]
 
   tags = {
     Name = "ExampleInstance"
