@@ -22,7 +22,7 @@ terraform {
 
 provider "aws" {
 
-  region  = "us-west-1"
+  region  = "us-east-1"
 
 }
 
@@ -30,7 +30,7 @@ provider "aws" {
 
 resource "aws_instance" "example_server" {
 
-  ami           = "ami-07f493412d6213de6"
+  ami           = "ami-0c7217cdde317cfec"
 
   instance_type = "t2.micro"
 
