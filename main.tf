@@ -22,9 +22,7 @@ terraform {
 
 provider "aws" {
 
-  region  = "us-west-2"
-
-  profile = "jack.roper"
+  region  = "us-west-1"
 
 }
 
