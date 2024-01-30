@@ -33,7 +33,7 @@ resource "local_file" "key" {
 
 
 resource "aws_subnet" "public" {
-  vpc_id                  = "${aws_vpc.my_vpc.id}"
+  vpc_id                  = "${aws_vpc.my-TF-VPC.id}"
   cidr_block              = "192.168.0.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = "true"
@@ -43,7 +43,7 @@ resource "aws_subnet" "public" {
   }
 }
 resource "aws_subnet" "private" {
-  vpc_id            = "${aws_vpc.my_vpc.id}"
+  vpc_id            = "${aws_vpc.my-TF-VPC.id}"
   cidr_block        = "192.168.1.0/24"
   availability_zone = "us-east-1b"
 
@@ -55,7 +55,7 @@ resource "aws_subnet" "private" {
 resource "aws_security_group" "my-TF-SG" {
   name        = "my-TF-SG"
   description = "This firewall allows SSH, HTTP and MYSQL"
-  vpc_id      = "${aws_vpc.my_vpc.id}"
+  vpc_id      = "${aws_vpc.my-TF-VPC.id}"
 
   ingress {
     description = "SSH"
