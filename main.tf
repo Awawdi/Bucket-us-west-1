@@ -33,7 +33,7 @@ resource "local_file" "key" {
 
 
 resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.my_vpc.id
+  vpc_id                  = "${aws_vpc.my_vpc.id}"
   cidr_block              = "192.168.0.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = "true"
@@ -43,7 +43,7 @@ resource "aws_subnet" "public" {
   }
 }
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.my_vpc.id
+  vpc_id            = "${aws_vpc.my_vpc.id}"
   cidr_block        = "192.168.1.0/24"
   availability_zone = "us-east-1b"
 
@@ -55,7 +55,7 @@ resource "aws_subnet" "private" {
 resource "aws_security_group" "my-TF-SG" {
   name        = "my-TF-SG"
   description = "This firewall allows SSH, HTTP and MYSQL"
-  vpc_id      = aws_vpc.my_vpc.id
+  vpc_id      = "${aws_vpc.my_vpc.id}"
 
   ingress {
     description = "SSH"
@@ -93,19 +93,6 @@ resource "aws_security_group" "my-TF-SG" {
   }
 }
 
-resource "aws_instance" "my-TF-ec2" {
-  ami           = "ami-0a3c3a20c09d6f377" # Use a valid AMI for your region and instance type
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.my-TF-subnet
-
-  security_groups = ["${aws_security_group.my-TF-SG.id}"]
-
-  tags = {
-    Name = "my-TF-ec2"
-  }
-}
-
-
 resource "aws_internet_gateway" "my-TF-IGW" {
   vpc_id = aws_vpc.my-TF-VPC.id
 
@@ -129,11 +116,11 @@ resource "aws_route_table" "my-TF-RT" {
 
 resource "aws_route_table_association" "a" {
   subnet_id      = aws_subnet.public.id
-  route_table_id = aws_route_table.rt.id
+  route_table_id = "${aws_route_table.my-TF-RT.id}"
 }
 resource "aws_route_table_association" "b" {
   subnet_id      = aws_subnet.private.id
-  route_table_id = aws_route_table.rt.id
+  route_table_id = "${aws_route_table.my-TF-RT.id}"
 }
 
 resource "aws_instance" "wordpress" {
