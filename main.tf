@@ -124,7 +124,7 @@ resource "aws_route_table_association" "b" {
 }
 
 resource "aws_instance" "wordpress" {
-  ami                    = "ami-03a115bbd6928e698"
+  ami                    = "ami-09c4422d56bd42f3e"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.generated_key.key_name
   vpc_security_group_ids = ["${aws_security_group.my-TF-SG.id}"]
@@ -136,7 +136,7 @@ resource "aws_instance" "wordpress" {
 }
 
 resource "aws_instance" "mysql" {
-  ami                    = "ami-04e98b8bcc00d2678"
+  ami                    = "ami-0b9fb2d6834800260"
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.generated_key.key_name
   vpc_security_group_ids = ["${aws_security_group.my-TF-SG.id}"]
